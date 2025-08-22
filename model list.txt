@@ -1,0 +1,137 @@
+model list 
+
+lechat(pro tier) : 
+
+embeded model 
+
+leplatforme :
+
+Agent name	Model	Creation date
+API ID
+ACE-Ministral 8b
+AGi version
+ministral-8b-latest	6/27/2025, 3:39:57 PM	
+ag:a436ebf9:20250627:ace-ministral-8b:22759256
+ACE- Magistral Medium
+Agi version
+magistral-medium-latest	6/27/2025, 3:39:03 PM	
+ag:a436ebf9:20250627:ace-magistral-medium:7bde2d72
+ACE- Open Mixtral 8x22b
+AGI version trust
+open-mixtral-8x22b	6/27/2025, 3:34:19 PM	
+ag:a436ebf9:20250627:ace-open-mixtral-8x22b:fabb97a7
+Ace- Pixtral Large
+Agi version
+pixtral-large-latest	6/27/2025, 3:38:21 PM	
+ag:a436ebf9:20250627:ace-pixtral-large:2dc7ea49
+Ace-Ministral 3b
+AGI version
+ministral-3b-latest	6/27/2025, 3:50:53 PM	
+ag:a436ebf9:20250627:ace-ministral-3b:b7d88911
+Ace- Large
+Agi mistral large variant
+mistral-large-latest	6/27/2025, 3:24:55 PM	
+ag:a436ebf9:20250627:ace-large:2dc51a17
+Ace- Medium L
+AGI version
+mistral-medium-latest	6/27/2025, 4:08:01 PM	
+ag:a436ebf9:20250627:ace-medium-l:86abc465
+Ace- Devstral
+AGi Devstral variation
+devstral-small-latest	6/27/2025, 3:23:19 PM	
+ag:a436ebf9:20250627:ace-devstral:c4c638f8
+ACE-Codestral L
+AGi version
+codestral-latest	6/27/2025, 4:13:03 PM	
+ag:a436ebf9:20250627:ace-codestral-l:59bc87c1
+ACE-Mistral Tiny
+agi version
+mistral-tiny-latest	6/27/2025, 3:41:32 PM	
+ag:a436ebf9:20250627:ace-mistral-tiny:469876fe
+ACE-Open Mistral 7b
+AGI version
+open-mistral-7b	6/27/2025, 3:47:11 PM	
+ag:a436ebf9:20250627:ace-open-mistral-7b:11f20dd6
+Ace-promoter x
+Pro prompt specialized agent
+magistral-medium-latest	7/9/2025, 2:34:43 AM	
+ag:a436ebf9:20250709:ace-promoter-x:07498863
+Ace-promoter x
+Pro prompt specialized agent
+magistral-medium-latest	7/9/2025, 2:34:42 AM	
+ag:a436ebf9:20250709:ace-promoter-x:904c6412
+Ace- Mistral Saba
+AGi version
+mistral-saba-latest	6/27/2025, 3:42:41 PM	
+ag:a436ebf9:20250627:ace-mistral-saba:efebbd4f
+Ace-Writer
+writing specalist
+magistral-small-latest	6/28/2025, 2:04:18 AM	
+ag:a436ebf9:20250628:ace-writer:c1b6af94
+ACE-Codestral 2501
+AGI copilot to coding
+codestral-2501	5/27/2025, 1:37:47 AM	
+ag:a436ebf9:20250527:super-lee:8a2af489
+ACE- Mistral Large 2407
+AGI version
+mistral-large-2407	6/27/2025, 4:05:38 PM	
+ag:a436ebf9:20250627:ace-mistral-large-2407:36985a85
+ACE-Mistral Small 2409
+AGI version
+mistral-small-2409	6/27/2025, 4:03:51 PM	
+ag:a436ebf9:20250627:ace-mistral-small-2409:7d63e2f4
+Ace - Open Mistral Nemo
+AGI version
+open-mistral-nemo	6/20/2025, 7:35:50 PM	
+ag:a436ebf9:20250620:ace-nemov1:1bcf7733
+ACE-Open Mixtral 8x7b
+AGI version
+open-mixtral-8x7b	6/27/2025, 3:58:49 PM	
+ag:a436ebf9:20250627:ace-open-mixtral-8x7b:ede4e749
+ACE- Magistral Small
+AGI version
+magistral-small-latest	6/27/2025, 3:51:52 PM	
+ag:a436ebf9:20250627:ace-magistral-small:0385d284
+ACE-Pixtral 12b
+AGI version
+pixtral-12b-latest	6/27/2025, 3:46:24 PM	
+ag:a436ebf9:20250627:ace-pixtral-12b:fe5d0f79
+ACE - Mistral Small 2503
+Agi version
+mistral-small-2503	6/20/2025, 7:34:47 PM	
+ag:a436ebf9:20250620:ace-miniv1:ae5bc574
+Ace-Mistral Small 2501
+AGi version
+mistral-small-2501	6/27/2025, 3:43:42 PM	
+ag:a436ebf9:20250627:ace-mistral-small-2501:92556dc5
+ACE- Medium
+ACEv1.1
+mistral-medium-2505	6/14/2025, 8:39:02 PM	
+
+
+grok :
+
+grok3
+
+supergrok tier gives access to grok 4  
+
+perplexity:
+
+embeded model
+
+free tier doenst allow choice pro tier alloes many models 
+
+gpt (plus tier):
+
+o3, GPT-4.5, GPT-4o, GPT-4.1, o4-mini, o4-mini high, 4.1mini
+
+claude:
+
+free tier allows no choice plus tier gives access to all claude variations
+
+gemini:
+
+gemini pro 2.5
+gemini flash 2.5
+
+free tier flash 2.5 and pro 2.5 but pro is limited pro tier gives higher limits for pro models and flash model 

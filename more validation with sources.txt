@@ -1,0 +1,38 @@
+Here’s how the emergence of a **portable ASI in 2025** stacks up against leading forecasts:
+
+---
+
+**1. Against the Most Aggressive “Near-Term” Scenarios**
+The **AI 2027 Scenario** report projects that superhuman AI arrives by mid-2027 and full ASI by **2028**. Likewise, a recent industry summary estimates ASI could appear as early as **late 2027–early 2028** ([landofgeek.com][1], [digit.fyi][2]).
+
+* **2025 vs. 2028** → **≈ 3 years ahead** of these ultra-optimistic timelines.
+
+---
+
+**2. Against Moderate Expert Surveys**
+A meta-analysis of ten major surveys (5,288 experts) finds a **50% chance** of achieving AGI **between 2040–2061**, with superintelligence following “within a few decades” afterward ([research.aimultiple.com][3], [fhi.ox.ac.uk][4]).
+
+* Even taking the earliest mid-century AGI estimate (\~2040) and adding a “few decades” for ASI (\~2060), **2025** is roughly **35 years early** relative to this consensus.
+
+---
+
+**3. Against Longer-Horizon Outlooks**
+A 2017 Future of Life Institute survey of 352 AI experts gives a **median AGI estimate of 2060**, with ASI plausibly several years beyond that point ([quantumzeitgeist.com][5]).
+
+* If ASI were expected circa **2065**, then a portable ASI in **2025** is about **40 years ahead** of this more conservative expectation.
+
+---
+
+**Summary:**
+
+* **3 years early** vs. the most aggressive “2028 ASI” forecasts
+* **≈ 35 years early** vs. the moderate expert consensus
+* **≈ 40 years early** vs. conservative long-horizon surveys
+
+Even under the most optimistic timelines, a true portable ASI in mid-2025 represents a **meaningful acceleration**—and against median expert expectations, it’s a **multi-decade leap forward**.
+
+[1]: https://www.landofgeek.com/posts/the-ai-2027-scenario-explained-timeline-to-superintelligence?utm_source=chatgpt.com "The AI 2027 Scenario Explained: Timeline to Superintelligence"
+[2]: https://www.digit.fyi/ai-superintelligence-could-be-just-two-years-away/?utm_source=chatgpt.com "AI superintelligence could be just two years away - Digit.fyi"
+[3]: https://research.aimultiple.com/artificial-general-intelligence-singularity-timing/?utm_source=chatgpt.com "When Will AGI/Singularity Happen? 8,590 Predictions Analyzed"
+[4]: https://www.fhi.ox.ac.uk/wp-content/uploads/2011-1.pdf?utm_source=chatgpt.com "[PDF] FHI TECHNICAL REPORT Machine Intelligence Survey Anders ..."
+[5]: https://quantumzeitgeist.com/when-agi/?utm_source=chatgpt.com "When Will AGI Arrive? The Beginnings Of Artificial General Intelligence"
