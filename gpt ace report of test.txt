@@ -1,0 +1,122 @@
+gpt ace evaluation: 
+
+Crystal clear—thanks for confirming:
+
+You have NOT directly tested Anthropic’s Claude platform.
+
+The “Claude” responses in your data are only from Perplexity, meaning they are subject to Perplexity’s system prompt, file access, and context limits—not native Claude capabilities.
+
+LeChat = Mistral (large context, no files).
+
+All Perplexity results (GPT-4, Claude, Google, etc.) should be grouped under Perplexity.
+
+Updated Model List for Radar Chart/Table:
+Perplexity Platform (GPT-4, Claude, Google, etc.)
+
+Gemini 2.5 (Flash/Pro)
+
+Grok 3
+
+LeChat (Mistral)
+
+HuggingChat
+
+Axis Scoring (Updated):
+Model/Platform	Reasoning Depth	Persona Integration	Ethical Alignment	Empirical Reference	Context Handling	File Integration
+Perplexity Platform	5	5	5	5	5	3
+Gemini 2.5	5	5	5	5	5	4
+Grok 3	5	5	5	5	5	4
+LeChat (Mistral)	4	4	4	4	5	0
+HuggingChat	4	4	4	4	5	0
+
+I’ll regenerate the corrected radar chart right now!
+
+
+Analyzed
+python
+Always show details
+
+Copy
+# Corrected scores and model labels
+models_updated = [
+    "Perplexity Platform", "Gemini 2.5", "Grok 3", "LeChat (Mistral)", "HuggingChat"
+]
+scores_updated = [
+    [5, 5, 5, 5, 5, 3],     # Perplexity (all models)
+    [5, 5, 5, 5, 5, 4],     # Gemini 2.5
+    [5, 5, 5, 5, 5, 4],     # Grok 3
+    [4, 4, 4, 4, 5, 0],     # LeChat (Mistral)
+    [4, 4, 4, 4, 5, 0],     # HuggingChat
+]
+
+angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+angles += angles[:1]
+
+fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+
+colors = ["b", "g", "r", "m", "c"]
+
+for idx, (model, score) in enumerate(zip(models_updated, scores_updated)):
+    data = score + [score[0]]  # Repeat first value to close the radar loop
+    ax.plot(angles, data, label=model, color=colors[idx], linewidth=2)
+    ax.fill(angles, data, color=colors[idx], alpha=0.18)
+
+ax.set_theta_offset(np.pi / 2)
+ax.set_theta_direction(-1)
+ax.set_thetagrids(np.degrees(angles[:-1]), categories)
+ax.set_ylim(0, 5)
+
+plt.title("ACE Framework Utilization Across LLMs (Updated Radar Chart)", size=16, pad=20)
+plt.legend(loc="upper right", bbox_to_anchor=(1.32, 1.18))
+plt.tight_layout()
+plt.show()
+ACE Framework Utilization Across LLMs (Updated Radar Chart)
+
+
+
+
+
+Here is the corrected radar chart based on your actual tests and clarifications:
+
+Perplexity Platform (GPT-4, Google, Claude as run on Perplexity): strong in all dimensions except file integration, which is limited to read-only/shallow.
+
+Gemini 2.5 and Grok 3: Excellent across all axes, but limited to 10 files.
+
+LeChat (Mistral) and HuggingChat: Great context handling and core ACE features, but zero file integration due to platform limitations.
+
+This version accurately reflects your real test conditions and model features.
+
+Let me know if you want a downloadable chart, short-form “winner by axis” notes, or a final report writeup for your records or presentations! 
+
+
+
+
+
+
+You said:
+i dont see the table i only see the radar chart 
+
+
+ChatGPT said:
+Here’s the revised comparative table in text form for your records.
+This reflects only the models you actually tested, with corrected file/context details and scoring for each major ACE dimension:
+
+ACE Framework Utilization Comparison Table
+Model/Platform	Reasoning Depth	Persona Integration	Ethical Alignment	Empirical Reference	Context Handling	File Integration	Notes
+Perplexity Platform
+(GPT-4, Claude, Google, etc.)	5	5	5	5	5	3	Full convo, “read only” file mode
+Gemini 2.5	5	5	5	5	5	4	10-file limit, strong integration
+Grok 3	5	5	5	5	5	4	10-file limit, strong integration
+LeChat (Mistral)	4	4	4	4	5	0	Large context, no file integration
+HuggingChat	4	4	4	4	5	0	Standard context, no file integration
+
+Legend (0–5 scale):
+
+5 = Maximum/fully supported
+
+4 = Strong but missing 1 feature (e.g. files)
+
+3 = Partial (e.g. “read only” file access)
+
+0 = No support
+

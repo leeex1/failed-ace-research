@@ -1,0 +1,122 @@
+ACE Controller App: Architecture Breakdown & Outline
+
+1. Introduction
+
+The ACE Controller App serves as the central nervous system for the ACE architecture, routing user inputs to multiple AI persona endpoints, aggregating responses, and orchestrating multi-pass feedback loops. This document outlines its core components, data flows, and technology stack.
+
+2. High-Level Architecture
+
+Frontend (React)
+
+Chat UI (text & voice input)
+
+Dashboard for live persona responses and logs
+
+Mode selector (e.g., Research, Empathy, Strategy)
+
+Backend (FastAPI)
+
+REST/WS API endpoints
+
+Routing Engine: dispatches requests to persona services
+
+Aggregation Module: collects and normalizes responses
+
+Judge Module: optional ASI evaluator for quality control
+
+Persona Endpoints
+
+Custom GPT URLs or Platform APIs (24 deployments)
+
+Mode-based weighting configuration
+
+Persistence Layer
+
+Changelog database (SQLite/Postgres)
+
+Metrics & logs store for evaluation
+
+3. Core Modules & Responsibilities
+
+Module
+
+Function
+
+router.py
+
+Distribute single user input to all enabled personas via async HTTP calls.
+
+aggregator.py
+
+Collect persona outputs, apply weights, and merge into a unified payload.
+
+judge.py
+
+Evaluate aggregated response against mode-specific thresholds.
+
+config.py
+
+Define persona endpoints, weights per mode, and API credentials.
+
+auth.py
+
+Manage user tokens, session validation, and placeholder substitution.
+
+models/
+
+Pydantic schemas for requests, responses, logs, and evaluation metrics.
+
+main.py
+
+FastAPI app: initializes modules, mounts routes, and configures CORS.
+
+frontend/
+
+React components: ChatWindow, PersonaPanels, Settings, and LogsViewer.
+
+4. Data Flow Sequence
+
+User Input arrives via React UI (POST /api/message).
+
+FastAPI receives and authenticates request.
+
+Router Module sends the input to each persona endpoint with mode and context.
+
+Persona Services return outputs asynchronously.
+
+Aggregator Module applies configured weights, merges responses.
+
+Judge Module (optional) scores the merged output; passes or flags.
+
+Response sent back to frontend; logs persisted in database.
+
+Feedback Loop: If multi-pass enabled, backend uses Judge feedback to re-query personas up to 3 iterations.
+
+5. Technology Stack
+
+Frontend: React, WebSocket (for real-time streaming), Tailwind CSS
+
+Backend: Python 3.10, FastAPI, httpx for async HTTP calls
+
+Database: SQLite (dev) / PostgreSQL (prod)
+
+Auth: JWT tokens
+
+Deployment: Docker (Compose), Node.js for build system
+
+6. Next Steps
+
+Initialize project repo with folder structure.
+
+Define config.py with placeholder endpoints and weights.
+
+Implement and unit-test router.py and aggregator.py.
+
+Create basic React chat UI and connect to local FastAPI.
+
+Add logging and judge evaluation.
+
+Iteratively test with GPT and LedChat endpoints.
+
+This document will evolve as the MVP is built and tested.
+

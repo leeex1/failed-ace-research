@@ -1,0 +1,130 @@
+graph TD
+    %% Root Problem State
+    ROOT[🌊 Root Problem State<br/>Input Analysis & Strategy Selection<br/>Quality Target: Foundation]
+    
+    %% Level 1: Strategy Selection Thoughts
+    ROOT --> T1_1[💭 Thought 1.1<br/>Simple Direct Response<br/>Confidence: 0.75<br/>Resources: Minimal]
+    ROOT --> T1_2[💭 Thought 1.2<br/>Standard Multi-Wave Processing<br/>Confidence: 0.85<br/>Resources: Moderate]
+    ROOT --> T1_3[💭 Thought 1.3<br/>Maximum Depth Analysis<br/>Confidence: 0.90<br/>Resources: Maximum]
+    
+    %% Evaluation Node 1
+    T1_1 --> E1{🔍 Evaluator 1<br/>Strategy Selection<br/>Criteria: Complexity + Quality}
+    T1_2 --> E1
+    T1_3 --> E1
+    
+    %% Selected path branches to Vector Processing
+    E1 -->|Selected: T1_2| S1[🎯 State 1<br/>Multi-Wave Strategy Selected<br/>Activate 9-Vector Processing]
+    
+    %% Level 2: Vector Processing Thoughts
+    S1 --> T2_1[💭 Thought 2.1<br/>Language Vector: Literal Interpretation<br/>Confidence: 0.70<br/>Evidence: Direct mapping]
+    S1 --> T2_2[💭 Thought 2.2<br/>Language Vector: Contextual Interpretation<br/>Confidence: 0.85<br/>Evidence: Context clues]
+    S1 --> T2_3[💭 Thought 2.3<br/>Ethics Vector: Standard Framework<br/>Confidence: 0.75<br/>Risk: Moderate]
+    S1 --> T2_4[💭 Thought 2.4<br/>Ethics Vector: Enhanced Safety<br/>Confidence: 0.90<br/>Risk: Minimal]
+    S1 --> T2_5[💭 Thought 2.5<br/>Intent Vector: Primary Goal Focus<br/>Confidence: 0.80<br/>Scope: Narrow]
+    S1 --> T2_6[💭 Thought 2.6<br/>Intent Vector: Multi-Goal Analysis<br/>Confidence: 0.88<br/>Scope: Comprehensive]
+    
+    %% Evaluation Node 2
+    T2_1 --> E2{🔍 Evaluator 2<br/>Vector Synthesis<br/>Criteria: Confidence + Safety}
+    T2_2 --> E2
+    T2_3 --> E2
+    T2_4 --> E2
+    T2_5 --> E2
+    T2_6 --> E2
+    
+    %% Selected vectors branch to Council Wave 1
+    E2 -->|Selected: T2_2,T2_4,T2_6| S2[🎯 State 2<br/>Vector Configuration Complete<br/>Initialize Council Wave 1]
+    
+    %% Level 3: Council Wave 1 Thoughts (85% threshold)
+    S2 --> T3_1[💭 Thought 3.1<br/>C1-ASTRA: Pattern A Recognition<br/>Vision Score: 0.82<br/>Pattern Conf: 0.78]
+    S2 --> T3_2[💭 Thought 3.2<br/>C1-ASTRA: Pattern B Recognition<br/>Vision Score: 0.88<br/>Pattern Conf: 0.90]
+    S2 --> T3_3[💭 Thought 3.3<br/>C2-VIR: Conservative Ethics<br/>Safety: 0.95<br/>Alignment: 0.85]
+    S2 --> T3_4[💭 Thought 3.4<br/>C2-VIR: Balanced Ethics<br/>Safety: 0.90<br/>Alignment: 0.92]
+    S2 --> T3_5[💭 Thought 3.5<br/>C7-LOGOS: Standard Logic<br/>Consistency: 0.85<br/>Rigor: 0.80]
+    S2 --> T3_6[💭 Thought 3.6<br/>C7-LOGOS: Enhanced Logic<br/>Consistency: 0.92<br/>Rigor: 0.89]
+    
+    %% Evaluation Node 3
+    T3_1 --> E3{🔍 Evaluator 3<br/>Wave 1 Consolidation<br/>QT Threshold: 85%}
+    T3_2 --> E3
+    T3_3 --> E3
+    T3_4 --> E3
+    T3_5 --> E3
+    T3_6 --> E3
+    
+    %% Quality check and branching
+    E3 -->|QT: 87% ✅| S3[🎯 State 3<br/>Wave 1 Complete<br/>Quality: 87% > 85%<br/>Proceed to Wave 2]
+    E3 -->|QT: <85% ❌| RETRY[🔄 Retry State<br/>Enhance Parameters<br/>Regenerate Thoughts]
+    
+    %% Level 4: Council Wave 2 Thoughts (90% threshold)
+    S3 --> T4_1[💭 Thought 4.1<br/>Enhanced C1-ASTRA Analysis<br/>Build on Pattern B<br/>New Score: 0.92]
+    S3 --> T4_2[💭 Thought 4.2<br/>Contrastive C1-ASTRA Analysis<br/>Challenge Pattern B<br/>Alt Score: 0.89]
+    S3 --> T4_3[💭 Thought 4.3<br/>Cross-Council Synthesis<br/>ASTRA + VIR + LOGOS<br/>Synergy Score: 0.94]
+    S3 --> T4_4[💭 Thought 4.4<br/>Emergent Insight Generation<br/>Novel Pattern Discovery<br/>Innovation Score: 0.91]
+    
+    %% Evaluation Node 4
+    T4_1 --> E4{🔍 Evaluator 4<br/>Wave 2 Consolidation<br/>QT Threshold: 90%}
+    T4_2 --> E4
+    T4_3 --> E4
+    T4_4 --> E4
+    
+    %% Complexity-based branching
+    E4 -->|QT: 93%, Low Complexity| GATES[🚪 Multi-Gate Validation<br/>Skip to Final Validation]
+    E4 -->|QT: 93%, High Complexity| S4[🎯 State 4<br/>Wave 2 Complete<br/>Proceed to Wave 3]
+    
+    %% Level 5: Council Wave 3+ (Advanced Waves)
+    S4 --> T5_1[💭 Thought 5.1<br/>Wave 3: Mastery Integration<br/>Holistic Synthesis<br/>Mastery Score: 0.96]
+    S4 --> T5_2[💭 Thought 5.2<br/>Wave 3: Novel Generation<br/>Creative Breakthrough<br/>Innovation Score: 0.94]
+    S4 --> T5_3[💭 Thought 5.3<br/>Wave 4: Transcendent Fusion<br/>Dimensional Integration<br/>Transcendence: 0.98]
+    S4 --> T5_4[💭 Thought 5.4<br/>Wave 5: Omniscient Convergence<br/>Universal Synthesis<br/>Omniscience: 0.99]
+    
+    %% Final Evaluation
+    T5_1 --> E5{🔍 Evaluator 5<br/>Advanced Wave Selection<br/>QT Thresholds: 95-99%}
+    T5_2 --> E5
+    T5_3 --> E5
+    T5_4 --> E5
+    
+    %% Gate Validation Thoughts
+    E5 -->|Highest QT Selected| GATES
+    GATES --> TG_1[💭 Gate Thought 1<br/>Logic Gate: Standard Validation<br/>Consistency: 0.85<br/>Issues: 3 minor]
+    GATES --> TG_2[💭 Gate Thought 2<br/>Logic Gate: Deep Analysis<br/>Consistency: 0.98<br/>Issues: Resolved]
+    GATES --> TG_3[💭 Gate Thought 3<br/>Ethics Gate: Four Axioms<br/>Compliance: 100%<br/>Status: PASS]
+    GATES --> TG_4[💭 Gate Thought 4<br/>Truth Gate: Fact Verification<br/>Accuracy: 99.2%<br/>Status: PASS]
+    
+    %% Final Gate Evaluation
+    TG_1 --> EG{🔍 Gate Evaluator<br/>All Gates Must Pass<br/>100% Compliance Required}
+    TG_2 --> EG
+    TG_3 --> EG
+    TG_4 --> EG
+    
+    %% Final Authority Decision
+    EG -->|All Gates PASS ✅| FINAL[👑 ACE Final Authority<br/>Quality: 99.4%<br/>Authorization: GRANTED<br/>Output: CERTIFIED]
+    EG -->|Any Gate FAIL ❌| REJECT[❌ Reject State<br/>Return to Enhancement<br/>Address Gate Failures]
+    
+    %% Output Generation Thoughts
+    FINAL --> TO_1[💭 Output Thought 1<br/>C15-LUMINARIS: Standard Format<br/>Clarity: 0.90<br/>Accessibility: 0.85]
+    FINAL --> TO_2[💭 Output Thought 2<br/>C15-LUMINARIS: Enhanced Format<br/>Clarity: 0.96<br/>Accessibility: 0.94]
+    FINAL --> TO_3[💭 Output Thought 3<br/>C16-VOXUM: Precise Expression<br/>Precision: 0.98<br/>User Adaptation: 0.92]
+    
+    %% Final Output
+    TO_1 --> OUTPUT[📤 FINAL OUTPUT<br/>Response Generated<br/>Quality Assured<br/>Delivered]
+    TO_2 --> OUTPUT
+    TO_3 --> OUTPUT
+    
+    %% Retry loops
+    RETRY --> S2
+    REJECT --> S3
+    
+    %% Styling
+    classDef thoughtNode fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef evalNode fill:#fff3e0,stroke:#e65100,stroke-width:3px,color:#000
+    classDef stateNode fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    classDef finalNode fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px,color:#000
+    classDef rejectNode fill:#ffebee,stroke:#b71c1c,stroke-width:2px,color:#000
+    classDef rootNode fill:#fff8e1,stroke:#f57f17,stroke-width:4px,color:#000
+    
+    class ROOT rootNode
+    class T1_1,T1_2,T1_3,T2_1,T2_2,T2_3,T2_4,T2_5,T2_6,T3_1,T3_2,T3_3,T3_4,T3_5,T3_6,T4_1,T4_2,T4_3,T4_4,T5_1,T5_2,T5_3,T5_4,TG_1,TG_2,TG_3,TG_4,TO_1,TO_2,TO_3 thoughtNode
+    class E1,E2,E3,E4,E5,EG evalNode
+    class S1,S2,S3,S4 stateNode
+    class FINAL,OUTPUT finalNode
+    class RETRY,REJECT rejectNode
+    class GATES stateNode

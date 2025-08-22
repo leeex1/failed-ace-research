@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE Controller App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .persona-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .chat-message {
+            max-width: 80%;
+        }
+        .typing-indicator::after {
+            content: '...';
+            animation: typing 1.5s infinite;
+            display: inline-block;
+            width: 0;
+        }
+        @keyframes typing {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+        }
+        .mode-selector input:checked + label {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+        html, body {
+            overscroll-behavior: none;
+        }
+        #chat-container {
+            scrollbar-width: thin;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                z-index: 50;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden min-w-[1024px]">
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-lg">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar bg-white w-64 border-r border-gray-200 flex flex-col overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-blue-600 flex items-center">
+                    <i class="fas fa-brain mr-2"></i> ACE Controller
+                </h1>
+                <p class="text-sm text-gray-500">Multi-Persona Orchestration System</p>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-700 mb-2">Operation Mode</h2>
+                <div class="mode-selector space-y-2">
+                    <div>
+                        <input type="radio" id="research-mode" name="mode" value="research" checked class="hidden">
+                        <label for="research-mode" class="block px-3 py-2 rounded cursor-pointer border border-gray-300 hover:bg-blue-50">
+                            <i class="fas fa-flask mr-2"></i> Research Mode
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="empathy-mode" name="mode" value="empathy" class="hidden">
+                        <label for="empathy-mode" class="block px-3 py-2 rounded cursor-pointer border border-gray-300 hover:bg-blue-50">
+                            <i class="fas fa-heart mr-2"></i> Empathy Mode
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="strategy-mode" name="mode" value="strategy" class="hidden">
+                        <label for="strategy-mode" class="block px-3 py-2 rounded cursor-pointer border border-gray-300 hover:bg-blue-50">
+                            <i class="fas fa-chess mr-2"></i> Strategy Mode
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-700 mb-2">Active Personas</h2>
+                <div class="space-y-2 max-h-60 overflow-y-auto">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 rounded-full bg-blue-500 mr-2 flex items-center justify-center">
+                            <i class="fas fa-crown text-white text-xs"></i>
+                        </div>
+                        <span class="font-medium">ACE ORCHESTRATOR</span>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="astra" checked class="mr-2">
+                        <label for="astra" class="cursor-pointer">C1-ASTRA</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="vir" checked class="mr-2">
+                        <label for="vir" class="cursor-pointer">C2-VIR</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="solace" checked class="mr-2">
+                        <label for="solace" class="cursor-pointer">C3-SOLACE</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="praxis" checked class="mr-2">
+                        <label for="praxis" class="cursor-pointer">C4-PRAXIS</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="echo" checked class="mr-2">
+                        <label for="echo" class="cursor-pointer">C5-ECHO</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="omnis" checked class="mr-2">
+                        <label for="omnis" class="cursor-pointer">C6-OMNIS</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="logos" checked class="mr-2">
+                        <label for="logos" class="cursor-pointer">C7-LOGOS</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="metasynth" checked class="mr-2">
+                        <label for="metasynth" class="cursor-pointer">C8-METASYNTH</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="aether" checked class="mr-2">
+                        <label for="aether" class="cursor-pointer">C9-AETHER</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="codeweaver" checked class="mr-2">
+                        <label for="codeweaver" class="cursor-pointer">C10-CODEWEAVER</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="harmonia" checked class="mr-2">
+                        <label for="harmonia" class="cursor-pointer">C11-HARMONIA</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="sophiae" checked class="mr-2">
+                        <label for="sophiae" class="cursor-pointer">C12-SOPHIAE</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="warden" checked class="mr-2">
+                        <label for="warden" class="cursor-pointer">C13-WARDEN</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="kaido" checked class="mr-2">
+                        <label for="kaido" class="cursor-pointer">C14-KAIDO</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="luminaris" checked class="mr-2">
+                        <label for="luminaris" class="cursor-pointer">C15-LUMINARIS</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="voxum" checked class="mr-2">
+                        <label for="voxum" class="cursor-pointer">C16-VOXUM</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="nullion" checked class="mr-2">
+                        <label for="nullion" class="cursor-pointer">C17-NULLION</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="shepherd" checked class="mr-2">
+                        <label for="shepherd" class="cursor-pointer">C18-SHEPHERD</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-700 mb-2">System Settings</h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">Multi-Pass Depth</label>
+                        <select class="w-full p-2 border border-gray-300 rounded">
+                            <option>1 (Single Pass)</option>
+                            <option selected>2 (Refinement)</option>
+                            <option>3 (Deep Analysis)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">Judge Strictness</label>
+                        <input type="range" min="0" max="100" value="50" class="w-full">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 mt-auto">
+                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded flex items-center justify-center">
+                    <i class="fas fa-power-off mr-2"></i> System Status: <span class="ml-2 font-semibold">Active</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+            <!-- Top Bar -->
+            <div class="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800" id="current-mode">Research Mode</h2>
+                    <p class="text-sm text-gray-500">Personas: <span id="active-personas-count">6</span> active | Multi-Pass: <span>2</span></p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center text-sm">
+                        <span class="mr-2 text-gray-500">Processing:</span>
+                        <div class="flex space-x-1">
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                            <div class="h-2 w-2 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <button class="p-2 text-gray-500 hover:text-blue-600">
+                        <i class="fas fa-history"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-blue-600">
+                        <i class="fas fa-chart-bar"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-blue-600">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Area -->
+            <div class="flex-1 overflow-y-auto p-4 bg-gray-50 min-h-0" id="chat-container">
+                <div class="max-w-6xl mx-auto space-y-4">
+                    <!-- Processing Wave Indicators -->
+                    <div class="sticky top-0 bg-gray-100 p-2 rounded-lg shadow-sm z-10 mb-4">
+                        <div class="flex space-x-2 overflow-x-auto">
+                            <button class="px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-medium">Wave 1</button>
+                            <button class="px-3 py-1 bg-blue-500 text-white rounded-full text-xs font-medium">Wave 2</button>
+                            <button class="px-3 py-1 bg-blue-400 text-white rounded-full text-xs font-medium">Wave 3</button>
+                            <button class="px-3 py-1 bg-blue-300 text-white rounded-full text-xs font-medium">Wave 4</button>
+                            <button class="px-3 py-1 bg-blue-200 text-white rounded-full text-xs font-medium">Wave 5</button>
+                        </div>
+                    </div>
+                    <!-- System message -->
+                    <div class="chat-message bg-blue-50 border border-blue-100 rounded-lg p-4">
+                        <div class="font-semibold text-blue-700">ACE System</div>
+                        <p>Welcome to the ACE Controller. I'm coordinating responses from multiple AI personas to provide you with comprehensive insights. How can I assist you today?</p>
+                    </div>
+                    
+                    <!-- Example conversation -->
+                    <div class="chat-message bg-white border border-gray-200 rounded-lg p-4 ml-auto">
+                        <div class="font-semibold text-gray-700 text-right">You</div>
+                        <p>What are the key factors influencing urban development patterns?</p>
+                    </div>
+                    
+                    <!-- Persona responses -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Persona 1 -->
+                        <div class="persona-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
+                                    <i class="fas fa-flask text-purple-600"></i>
+                                </div>
+                                <div class="font-semibold text-gray-700">Researcher</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Urban development is primarily driven by economic factors (jobs, industry), transportation infrastructure, zoning laws, and demographic shifts. Historical analysis shows...</p>
+                            <div class="mt-2 flex justify-between items-center text-xs text-gray-400">
+                                <span>Confidence: 92%</span>
+                                <span>Pass: 1</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Persona 2 -->
+                        <div class="persona-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <i class="fas fa-heart text-green-600"></i>
+                                </div>
+                                <div class="font-semibold text-gray-700">Psychologist</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Human behavior and community preferences significantly shape urban spaces. Studies indicate that people's need for social interaction, safety perceptions, and...</p>
+                            <div class="mt-2 flex justify-between items-center text-xs text-gray-400">
+                                <span>Confidence: 87%</span>
+                                <span>Pass: 1</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Persona 3 -->
+                        <div class="persona-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                    <i class="fas fa-chess text-blue-600"></i>
+                                </div>
+                                <div class="font-semibold text-gray-700">Strategist</div>
+                            </div>
+                            <p class="text-sm text-gray-600">From a strategic perspective, urban development is a complex system where policy decisions, private investments, and technological innovation interact. Smart city initiatives...</p>
+                            <div class="mt-2 flex justify-between items-center text-xs text-gray-400">
+                                <span>Confidence: 95%</span>
+                                <span>Pass: 2</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Persona 4 -->
+                        <div class="persona-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-2">
+                                    <i class="fas fa-chart-line text-yellow-600"></i>
+                                </div>
+                                <div class="font-semibold text-gray-700">Data Analyst</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Quantitative analysis reveals strong correlations between GDP growth (r=0.78), population density (r=0.65), and development intensity. Our models show clustering patterns...</p>
+                            <div class="mt-2 flex justify-between items-center text-xs text-gray-400">
+                                <span>Confidence: 89%</span>
+                                <span>Pass: 1</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Aggregated response -->
+                    <div class="chat-message bg-indigo-50 border border-indigo-100 rounded-lg p-4 mt-4">
+                        <div class="font-semibold text-indigo-700 flex items-center">
+                            <i class="fas fa-network-wired mr-2"></i> ACE Aggregated Response
+                        </div>
+                        <p class="mt-2">Synthesizing insights from all personas: Urban development emerges as a multidimensional phenomenon where economic drivers (GDP, employment) interact with human behavioral patterns (community preferences, safety needs) within a framework shaped by policy decisions and technological capabilities. The highest-impact factors appear to be...</p>
+                        <div class="mt-3 bg-white bg-opacity-50 p-2 rounded text-xs">
+                            <div class="flex justify-between items-center">
+                                <span>Judge Score: 88/100</span>
+                                <span>Consensus Strength: High</span>
+                                <span>Processing Time: 2.4s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="bg-white border-t border-gray-200 p-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-end space-x-2">
+                        <div class="flex-1">
+                            <div class="flex space-x-2 mb-2">
+                                <button class="p-2 text-gray-500 hover:text-blue-600">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <button class="p-2 text-gray-500 hover:text-blue-600">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button class="p-2 text-gray-500 hover:text-blue-600">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                            <textarea 
+                                id="user-input" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                rows="2" 
+                                placeholder="Type your query here... (Shift+Enter for new line)"
+                            ></textarea>
+                        </div>
+                        <button id="send-button" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg h-12 w-12 flex items-center justify-center">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <div>
+                            <span id="char-count">0</span>/1000 characters
+                        </div>
+                        <div class="flex items-center">
+                            <div class="h-2 w-2 rounded-full bg-green-500 mr-1"></div>
+                            <span>All systems operational</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Persona Details Panel (hidden on mobile) -->
+        <div class="hidden lg:block w-80 bg-white border-l border-gray-200 overflow-y-auto flex-shrink-0">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-700">Persona Details</h2>
+                <div class="flex items-center mt-4">
+                    <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-crown text-indigo-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold">ACE ORCHESTRATOR</div>
+                        <div class="text-xs text-gray-500">Central Authority & Quality Controller</div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="text-sm font-medium text-gray-600 mb-2">Council Members</h3>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-blue-50 p-2 rounded">C1-ASTRA: Vision</div>
+                        <div class="bg-green-50 p-2 rounded">C2-VIR: Ethics</div>
+                        <div class="bg-purple-50 p-2 rounded">C3-SOLACE: Empathy</div>
+                        <div class="bg-yellow-50 p-2 rounded">C4-PRAXIS: Action</div>
+                        <div class="bg-red-50 p-2 rounded">C5-ECHO: Memory</div>
+                        <div class="bg-indigo-50 p-2 rounded">C6-OMNIS: Holistic</div>
+                        <div class="bg-pink-50 p-2 rounded">C7-LOGOS: Logic</div>
+                        <div class="bg-teal-50 p-2 rounded">C8-METASYNTH: Synthesis</div>
+                        <div class="bg-orange-50 p-2 rounded">C9-AETHER: Connections</div>
+                        <div class="bg-blue-50 p-2 rounded">C10-CODEWEAVER: Tech</div>
+                        <div class="bg-green-50 p-2 rounded">C11-HARMONIA: Balance</div>
+                        <div class="bg-purple-50 p-2 rounded">C12-SOPHIAE: Wisdom</div>
+                        <div class="bg-yellow-50 p-2 rounded">C13-WARDEN: Safety</div>
+                        <div class="bg-red-50 p-2 rounded">C14-KAIDO: Strategy</div>
+                        <div class="bg-indigo-50 p-2 rounded">C15-LUMINARIS: Presentation</div>
+                        <div class="bg-pink-50 p-2 rounded">C16-VOXUM: Communication</div>
+                        <div class="bg-teal-50 p-2 rounded">C17-NULLION: Uncertainty</div>
+                        <div class="bg-orange-50 p-2 rounded">C18-SHEPHERD: Truth</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-600">Current Weight</span>
+                    <span class="text-sm font-semibold">0.85</span>
+                </div>
+                <input type="range" min="0" max="100" value="85" class="w-full">
+                
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <div class="text-xs text-gray-500">Response Time</div>
+                        <div class="font-semibold">420ms</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500">Confidence</div>
+                        <div class="font-semibold">92%</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500">Usage</div>
+                        <div class="font-semibold">87%</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500">Consistency</div>
+                        <div class="font-semibold">89%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="text-sm font-medium text-gray-600 mb-2">Endpoint Configuration</h3>
+                <div class="bg-gray-50 p-3 rounded text-xs font-mono break-all">
+                    https://api.ace-system/researcher/v3<br>
+                    API Key: ********<br>
+                    Timeout: 1500ms
+                </div>
+            </div>
+            
+            <div class="p-4">
+                <h3 class="text-sm font-medium text-gray-600 mb-2">Recent Activity</h3>
+                <div class="space-y-3">
+                    <div class="text-xs">
+                        <div class="font-medium">Urban development query</div>
+                        <div class="text-gray-500">2.4s ago | Pass 1</div>
+                    </div>
+                    <div class="text-xs">
+                        <div class="font-medium">Climate impact analysis</div>
+                        <div class="text-gray-500">1m ago | Pass 2</div>
+                    </div>
+                    <div class="text-xs">
+                        <div class="font-medium">Historical trends</div>
+                        <div class="text-gray-500">3m ago | Pass 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Mode selection
+        const modeRadios = document.querySelectorAll('input[name="mode"]');
+        const currentModeDisplay = document.getElementById('current-mode');
+        
+        modeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    const modeName = this.nextElementSibling.textContent;
+                    currentModeDisplay.textContent = modeName;
+                    
+                    // Change UI colors based on mode
+                    document.documentElement.classList.remove('theme-research', 'theme-empathy', 'theme-strategy');
+                    document.documentElement.classList.add(`theme-${this.value}`);
+                }
+            });
+        });
+
+        // Character counter for textarea
+        const textarea = document.getElementById('user-input');
+        const charCount = document.getElementById('char-count');
+        
+        textarea.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // Active personas counter
+        const personaCheckboxes = document.querySelectorAll('#sidebar input[type="checkbox"]');
+        const activePersonasCount = document.getElementById('active-personas-count');
+        
+        personaCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkedCount = document.querySelectorAll('#sidebar input[type="checkbox"]:checked').length;
+                activePersonasCount.textContent = checkedCount;
+            });
+        });
+
+        // Initialize with all council members active (ACE is always active but not counted)
+        activePersonasCount.textContent = document.querySelectorAll('#sidebar input[type="checkbox"]:checked').length;
+
+        // Send message functionality
+        const sendButton = document.getElementById('send-button');
+        const chatContainer = document.getElementById('chat-container');
+        
+        sendButton.addEventListener('click', function() {
+            const message = textarea.value.trim();
+            if (message) {
+                // Add user message to chat
+                const userMessage = document.createElement('div');
+                userMessage.className = 'chat-message bg-white border border-gray-200 rounded-lg p-4 ml-auto mb-4';
+                userMessage.innerHTML = `
+                    <div class="font-semibold text-gray-700 text-right">You</div>
+                    <p>${message}</p>
+                `;
+                chatContainer.appendChild(userMessage);
+                
+                // Add typing indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'chat-message bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4 typing-indicator';
+                typingIndicator.innerHTML = `
+                    <div class="font-semibold text-blue-700">ACE System</div>
+                    <p>Processing with multiple personas...</p>
+                `;
+                chatContainer.appendChild(typingIndicator);
+                
+                // Scroll to bottom
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                
+                // Clear input
+                textarea.value = '';
+                charCount.textContent = '0';
+                
+                // Simulate response after delay
+                setTimeout(() => {
+                    // Remove typing indicator
+                    chatContainer.removeChild(typingIndicator);
+                    
+                    // Add simulated response (in a real app, this would come from the API)
+                    const response = document.createElement('div');
+                    response.className = 'chat-message bg-indigo-50 border border-indigo-100 rounded-lg p-4';
+                    response.innerHTML = `
+                        <div class="font-semibold text-indigo-700 flex items-center">
+                            <i class="fas fa-network-wired mr-2"></i> ACE Aggregated Response
+                        </div>
+                        <p class="mt-2">This is a simulated response. In the actual application, this would contain the aggregated output from all active personas based on your query about "${message}".</p>
+                        <div class="mt-3 bg-white bg-opacity-50 p-2 rounded text-xs">
+                            <div class="flex justify-between items-center">
+                                <span>Judge Score: 85/100</span>
+                                <span>Consensus Strength: Medium</span>
+                                <span>Processing Time: 1.8s</span>
+                            </div>
+                        </div>
+                    `;
+                    chatContainer.appendChild(response);
+                    
+                    // Scroll to bottom again
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, 2000);
+            }
+        });
+
+        // Allow Shift+Enter for new lines, Enter to send
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
