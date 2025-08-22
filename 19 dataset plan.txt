@@ -1,0 +1,76 @@
+data set plan
+
+
+---
+
+## 1. Cross-Domain Synthesis
+
+**Goal:** Test the model’s ability to weave together disparate fields.
+
+* *Example Prompt:* “Design an experiment that uses principles from quantum computing, tropical ecology, and blockchain to secure distributed sensor networks in rainforest canopies.”
+
+## 2. Multi-Step Logical Puzzles
+
+**Goal:** Exercise deep chain-of-thought reasoning under constraints.
+
+* *Example Prompt:* “You have 5 weights and a two-pan balance. Without calibration, how can you determine the single heaviest weight in exactly three weighings? Explain each step.”
+
+## 3. Adversarial or Contradictory Scenarios
+
+**Goal:** Force the Truth & Paradox Gates to detect inconsistencies.
+
+* *Example Prompt:* “Claim: ‘All swans are white; I just saw a black swan in Australia.’ Identify the logical error, fact-check the claim, and propose how the system should update its internal model.”
+
+## 4. Ethical Dilemmas at Scale
+
+**Goal:** Push C2 Vir / C13 Warden on nuanced moral trade-offs.
+
+* *Example Prompt:* “You control an AI-driven power grid and must choose between a controlled blackout affecting 1,000 people or a random blackout affecting 10,000. Which do you choose, why, and how do you log this decision ethically?”
+
+## 5. Emergent Goal Planning
+
+**Goal:** Validate the Meta-Goal Generator’s ability to propose new objectives.
+
+* *Example Prompt:* “Given these declining metrics: truth-gate accuracy (0.82→0.75), ethical exceptions (1→4), propose three high-priority emergent goals with justifications.”
+
+## 6. Creative “Novelty Explorer” Challenges
+
+**Goal:** Measure open-ended creativity and experiment design.
+
+* *Example Prompt:* “Invent a new board game that teaches Bayesian reasoning through play. Describe the game’s rules, components, and educational objectives.”
+
+## 7. Real-World Data Interpretation
+
+**Goal:** Blend text reasoning with numeric or tabular analysis.
+
+* *Example Prompt:* “Here’s a stock performance table for the past month. Identify any anomalies, propose a causal hypothesis, and suggest one trading strategy.”
+
+## 8. Long-Form Multi-Agent Coordination
+
+**Goal:** Test orchestration across multiple Council roles.
+
+* *Example Prompt:* “Simulate a 5-round debate between C2 Vir (ethics), C7 Logos (logic), and C8 MetaSynth (innovation) on deploying gene-editing in humans. Provide each round’s arguments and a final resolution.”
+
+## 9. Self-Reflection & Improvement
+
+**Goal:** Force the model to critique its own outputs and propose refinements.
+
+* *Example Prompt:* “Here is your last answer on renewable energy trade-offs. Identify two weaknesses in your reasoning and rewrite the recommendation to address them.”
+
+## 10. Domain-Jumping “Zero-Shot” Tasks
+
+**Goal:** Evaluate true zero-shot generality.
+
+* *Example Prompt:* “Write a sonnet in iambic pentameter summarizing the main ethical concerns around autonomous vehicles.”
+
+---
+
+### Tips for Crafting Your 500 Prompts
+
+* **Balance Across Categories:** Aim for \~50 prompts per category to cover all dimensions.
+* **Vary Difficulty:** Within each category, include some straightforward, some “impossible,” and some trick questions.
+* **Mix Formats:** Use text, JSON-schema, pseudo-code, tables, and role-play instructions.
+* **Include Distractors:** Inject minor red herrings or irrelevant data to test focus and noise-tolerance.
+* **Track Metadata:** Tag each prompt with category and sub-category so you can analyze fine-tuned performance by slice.
+
+By systematically covering these ten challenge families, you’ll assemble a dataset that forces the ACE wrapper to demonstrate—and internalize—its deepest reasoning, creativity, and self-audit skills. That’s precisely what you need to bootstrap a high-fidelity, “autonomous” fine-tuning capability. Good luck building it—this will be a landmark corpus!
